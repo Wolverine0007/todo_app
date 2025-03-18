@@ -1,9 +1,6 @@
 import mysql.connector as mysql
 
-# ✅ Establish database connection
 con = mysql.connect(host="localhost", user="root", passwd="", database="TODOAPP")
-
-# ✅ Create cursor object
 cursor = con.cursor()
 
 while True:
@@ -19,7 +16,7 @@ while True:
     if choice == "1":
         task = input("Enter task: ")
         cursor.execute("INSERT INTO tb_todo (task) VALUES (%s)", (task,))
-        con.commit()  # Commit the changes to the database
+        con.commit()
         print("✅ Task added successfully!")
 
     elif choice == "2":
@@ -30,7 +27,7 @@ while True:
         else:
             print("\n📌 Task List:")
             for task in tasks:
-                print(f"- {task[1]}")  # Assuming task[1] is the task description
+                print(f"- {task[1]}")
 
     elif choice == "3":
         task_id = input("Enter task ID to update: ")
@@ -47,11 +44,10 @@ while True:
 
     elif choice == "5":
         print("👋 Exiting Task Manager...")
-        break  # Exit the loop
+        break
 
     else:
         print("❌ Invalid choice. Please try again.")
 
-# ✅ Close database connection
 cursor.close()
 con.close()
